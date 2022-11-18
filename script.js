@@ -8,6 +8,11 @@ let clear = document.getElementById('clear')
 let tempArea = document.getElementById('temp-area')
 let tempText = document.getElementById('temp-text')
 
+// radio elements
+
+let ftocRadio = document.getElementById('radio1')
+let ctofRadio = document.getElementById('radio2')
+
 // F to C conversion
 
 let ftocConversion = function() {
@@ -51,4 +56,55 @@ ctof.addEventListener("click", ctofConversion)
 clear.addEventListener("click", function(e) {
     input.value = ''
     tempText.innerText = 'Temp goes here'
+})
+
+
+// radio-specific functionality
+
+let submitFunction = function(e) {
+    if(ftocRadio.checked === true) {
+        ftocConversion()
+    } else if(ctofRadio.checked === true) {
+        let preConValue = input.value
+        let postConValue = (preConValue * 9/5) + 32
+        tempText.innerText = postConValue
+
+
+        if (postConValue <= 32) {
+            tempText.style.backgroundColor = "cornflowerblue"
+        }
+
+        if (postConValue >= 100) {
+            tempText.style.backgroundColor = "crimson"
+        }
+    }
+}
+
+submit.addEventListener("click", function(e) {
+    if(ftocRadio.checked === true) {
+        let preConValue = input.value
+        let postConValue = (preConValue - 32) * (5/9)
+        tempText.innerText = postConValue
+
+        if (postConValue <= 0) {
+            tempText.style.backgroundColor = "cornflowerblue"
+        }
+
+        if (postConValue >= 36) {
+            tempText.style.backgroundColor = "crimson"
+        }
+    } else if(ctofRadio.checked === true) {
+        let preConValue = input.value
+        let postConValue = (preConValue * 9/5) + 32
+        tempText.innerText = postConValue
+
+
+        if (postConValue <= 32) {
+            tempText.style.backgroundColor = "cornflowerblue"
+        }
+
+        if (postConValue >= 100) {
+            tempText.style.backgroundColor = "crimson"
+        }
+    }
 })
